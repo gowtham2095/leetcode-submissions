@@ -11,6 +11,11 @@
  * @return {number}
  */
 
+// there are two catches in this problem. If the path value needs to be considered we skip the negative part by doing Math.max against zero (i.e) let leftSum = Math.max(traverseTree(root.left, result), 0);
+
+
+// When we return we do Math.max(left subtree and right subtree). Coz to be considered as a path for upper level root there can only be one subtree through which the path emerges.
+
 function traverseTree(root, result = {}) {
     if (root) {
         let leftSum = Math.max(traverseTree(root.left, result), 0);
@@ -31,3 +36,6 @@ var maxPathSum = function(root) {
     traverseTree(root, result);
     return result.max;
 };
+
+
+
