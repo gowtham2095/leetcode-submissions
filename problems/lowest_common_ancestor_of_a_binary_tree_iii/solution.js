@@ -12,53 +12,52 @@
  * @param {Node} node
  * @return {Node}
  */
-
-function traverseTree(root, node, map) {
+function findNode(root, node, result = {}) {
     if (root) {
-        if (root == node) {
-            return true;
-        } else {
-            let leftTraversal = map.get(root.left) === false ? false : traverseTree(root.left, node, map);
-            let rightTraversal = map.get(root.right) === false ? false : traverseTree(root.right, node, map)
-            let val = leftTraversal || rightTraversal
-            if (!val) {
-                map.set(root, false);
-                return false;
-            }
-            return true;
+        findNode(root.left, node, result);
+        if (node == root) {
+            result.node = root;
         }
+        findNode(root.right, node, result);
     }
-    return false;
 }
 
-function findLowestCommonAncestor(p, q) {
-    let map = new Map();
-    if (traverseTree(p.left, q, map) || traverseTree(p.right, q, map)) {
-        return p;
-    } else if (traverseTree(q.left, p, map) || traverseTree(q.right, p, map)) {
-        return q;
-    } else {
-        let root = p.parent;
-        while(root != null) {
-            let val = traverseTree(root, q, map);
-            if (val) {
-                break;
-            }
-            root = root.parent;
-        }
-        
-        if (root != null) {
-            return root;
-        }
+function traverse(p, map) {
+    if (p.parent != null) {
+        map.set(p.parent, true);
+        traverse(p.parent, map);
     }
+}
+
+function returnCommonParent(q, map) {
+    if (q) { 
+        if (map.get(q.parent)) {
+            return q.parent;
+        }
+        return returnCommonParent(q.parent, map);
+    }
+}
+
+function lowestAncestor(p, q) {
+    let result = {}
+    findNode(p, q, result);
+    if (result.node) {
+        return p;
+    }
+    result = {};
+    findNode(q, p, result);
+    if (result.node) {
+        return q;
+    }
+    let map = new Map();
+    traverse(p, map);
+    return returnCommonParent(q, map);
 }
 
 var lowestCommonAncestor = function(p, q) {
-    return findLowestCommonAncestor(p, q);
+    return lowestAncestor(p, q);
 };
+    
+    
 
-
-
-
-
-
+    
