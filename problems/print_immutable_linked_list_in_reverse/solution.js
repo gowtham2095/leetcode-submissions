@@ -18,14 +18,9 @@
  * @param {ImmutableListNode} head
  * @return {void}
  */
-
-function listReverse(head) {
-    if (head.getNext()) {
-        listReverse(head.getNext());
-    }
-    head.printValue();
-}
-
 var printLinkedListInReverse = function(head) {
-    listReverse(head);
+    if (head) {
+        printLinkedListInReverse(head.getNext());
+        head.printValue();
+    }
 };
