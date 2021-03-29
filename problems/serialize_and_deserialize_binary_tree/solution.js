@@ -24,7 +24,6 @@ function preOrder(root, str = '') {
         }
     }
     buildString(root);
-    console.log(str);
     return str;
 }
 
