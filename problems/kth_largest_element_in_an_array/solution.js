@@ -11,3 +11,11 @@ function kThLargestElement(nums, k) {
 var findKthLargest = function(nums, k) {
     return kThLargestElement(nums, k);
 };
+
+
+
+// Use a heap
+
+// Time Complexity is NlogK
+
+// Space complexity is k
