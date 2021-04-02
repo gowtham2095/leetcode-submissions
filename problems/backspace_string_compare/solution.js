@@ -1,8 +1,3 @@
-/**
- * @param {string} S
- * @param {string} T
- * @return {boolean}
- */
 
 function removeBackSpaces(s) {
     let stack = [];
@@ -23,3 +18,8 @@ function removeBackSpaces(s) {
 var backspaceCompare = function(S, T) {
     return removeBackSpaces(S) == removeBackSpaces(T);
 };
+
+
+
+
+
