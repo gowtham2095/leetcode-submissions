@@ -2,18 +2,28 @@
  * @param {number[][]} intervals
  * @return {number[][]}
  */
-var merge = function(intervals) {
-    intervals.sort((a, b) => a[0] -b[0])
+
+function mergeIntervals(intervals) {
+    intervals.sort((a, b) => a[0] - b[0]);
     let result = [];
-    let lastElement;
-    intervals.forEach((interval) => {
-        if (result.length === 0 || (result.length && result[result.length -1][1] < interval[0])) {
-            result.push(interval);
+    result.push(intervals[0]);
+    for (let i = 1; i < intervals.length; i++) {
+        let resultLength = result.length - 1;
+        if (intervals[i][0] <= result[resultLength][1] && intervals[i][1] >= result[resultLength][0]) {
+            let resultLatest = result.pop();
+            let left = Math.min(resultLatest[0], intervals[i][0]);
+            let right = Math.max(resultLatest[1], intervals[i][1]);
+            result.push([left, right]);
         } else {
-            lastElement = result.pop();
-            lastElement[1] = Math.max(lastElement[1], interval[1]);
-            result.push(lastElement);
+            result.push(intervals[i]);
         }
-    })
+    }
     return result;
+}
+
+var merge = function(intervals) {
+    return mergeIntervals(intervals);
 };
+
+
+
