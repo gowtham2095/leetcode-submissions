@@ -2,27 +2,33 @@
  * @param {number[]} digits
  * @return {number[]}
  */
+
 function addOne(digits) {
-    let numLength = digits.length - 1;
-    let i = numLength;
+    let j = digits.length - 1;
     let carry = 1;
-    while (i >= 0) {
-        if (digits[i] + carry == 10) {
+    while(j >= 0) {
+        if (digits[j] + carry == 10) {
+            digits[j] = 0;
             carry = 1;
-            digits[i] = 0;
         } else {
-            digits[i] = digits[i] + carry;
+            digits[j] = digits[j] + carry;
             carry = 0;
         }
-        i--;
+        j--;
     }
     
     if (carry) {
         digits.unshift(carry);
     }
-    return digits;
+    
 }
-
 var plusOne = function(digits) {
-    return addOne(digits);
+    addOne(digits);
+    return digits;
 };
+
+
+
+
+
+
