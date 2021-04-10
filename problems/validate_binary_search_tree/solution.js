@@ -15,12 +15,12 @@ function isValid(root, lowValue, highValue) {
     if (root == null) {
         return true;
     }
-    if ((lowValue != null && lowValue.val >= root.val) || (highValue != null && highValue.val <= root.val)) {
-       return false; 
-    }
-    return isValid(root.left, lowValue, root) && isValid(root.right, root, highValue);
+    // if ( lowValue >= root.val || highValue <= root.val) {
+    //    return false;
+    // }
+    return lowValue < root.val && highValue > root.val && isValid(root.left, lowValue, root.val) && isValid(root.right, root.val, highValue);
 }
 
 var isValidBST = function(root) {
-    return isValid(root, null, null);
+    return isValid(root, -Infinity, Infinity);
 };
