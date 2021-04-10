@@ -12,7 +12,6 @@
  */
 
 var levelOrder = function(root) {
-    
     let list = [];
     let result = []
     
