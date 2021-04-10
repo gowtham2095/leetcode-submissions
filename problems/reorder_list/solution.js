@@ -60,15 +60,10 @@ function findMiddleNode(head) {
 var reorderList = function(head) {
     let middleNode = findMiddleNode(head);
     let newList = reverseList(middleNode);
-    console.log(newList)
+    // console.log(newList)
     return mergeList(head, newList);
 };
 
-
-
-
-
-// 1 -> 2 -> 3 -> 4 -> 5
 
 
 
