@@ -4,109 +4,54 @@
  */
 
 
-
-
-function calculateSquares(mat) {  
-    let result = 0;
-    for (let i = 0; i < mat.length; i++) {
-        for (let j = 0; j < mat[0].length; j++) { 
-            if (mat[i][j] == 1) {
-                if (i == 0 || j == 0) {
-                    result += 1;      
-                } else {
-                    let min = Math.min(mat[i -1][j], mat[i][j -1], mat[i -1][j -1]) + 1;
-                    result += min;
-                    mat[i][j] = min;
-                }
-            }
+function findSquareMatricesDp(matrix) {
+    for (let i = 1; i < matrix.length; i++) {
+        for (let j = 1; j < matrix[0].length; j++) {
+            if (matrix[i][j])
+                matrix[i][j] = Math.min(matrix[i - 1][j], matrix[i][j-1], matrix[i-1][j-1]) + 1;
         }
     }
-    return result;
+    
+    let sum = 0;
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            sum += matrix[i][j];
+        }
+    }
+    return sum;
 }
 
 var countSquares = function(matrix) {
-    return calculateSquares(matrix);
+    return findSquareMatricesDp(matrix);
 };
 
 
-[[0,0,0],
- [0,1,0],
- [0,1,0],
- [1,1,1],
+[[1,0,1],
+ [1,1,0],
  [1,1,0]]
 
-[ [ 0, 0, 0 ], 
- [ 0, 1, 0 ], 
- [ 0, 1, 0 ], 
- [ 1, 2, 1 ], 
- [ 1, 2, 0 ] ]
 
-// // [
-// //   [0,1,1,1],
-// //   [1,1,1,1],
-// //   [0,1,1,1]
-// // ]
+// [
+//   [0,1,1,1],
+//   [1,1,1,1],
+//   [0,1,1,1]
+// ]
 
 
-// Row based
+// 0, 1, 1, 1
 
-// // [0, 1, 2, 3]
-// // [1, 2, 3, 4]
-// // [0, 1, 2, 3]
+// 1, 1, 2, 2
+
+// 0, 1, 2, 3
 
 
-// Column based
-
-// //   0 1 1 1
-
-// //   1 2 2 2
-
-// //   0 3 3 3
+// 3 + 6 + 6
 
 
 
 
+// Min of up, diagnol and left + 1
 
-
-
-
-
-
-
-
-
-
-//   
-
-
-// 3 + 2 + 1 + 2 + 2 + 2 + 1 + 1 + 1 + 1
-
-
-
-// [1,0,1],
-// [1,1,0],
-// [1,1,0]
-
-
-// 1, 0, 1
-// 1, 2, 0
-// 1, 2, 0
-
-// 1 0 1
-// 2 1,0
-// 3,2,0
-
-
-// 1 + 1 + 1  + 1 + 1 + 2
-
-
-
-
-
-
-
-
-
-
+// all 1 include one sided matrix
 
 
