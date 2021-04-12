@@ -18,7 +18,7 @@ function returnMaxWindow(s, k) {
         count[s.charCodeAt(right)]++;
         maxOccurenceOfChar = Math.max(maxOccurenceOfChar, count[s.charCodeAt(right)]);
         diffCharacters = (right - left + 1) - maxOccurenceOfChar;
-        console.log(diffCharacters);
+        // console.log(diffCharacters);
         if (diffCharacters > k) {
             count[s.charCodeAt(left)]--;
             left++;
@@ -28,9 +28,6 @@ function returnMaxWindow(s, k) {
     }
     return max;
 }
-
-
-// AABAABCC
 
 
 var characterReplacement = function(s, k) {
