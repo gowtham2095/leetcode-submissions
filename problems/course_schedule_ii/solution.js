@@ -38,7 +38,6 @@ function topSort(n, preReq, map) {
         result.push(element);
         let node = map[element];
         node.list.forEach((nodeEle) => {
-            console.log(nodeEle)
            if (--map[nodeEle].indegree == 0) {
                stack.push(nodeEle);
            }
