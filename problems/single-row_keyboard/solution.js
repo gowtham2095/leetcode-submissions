@@ -3,20 +3,31 @@
  * @param {string} word
  * @return {number}
  */
-var calculateTime = function(keyboard, word) {
-    let keyboardMap = {};
-    keyboard.split('').forEach((key, index) => {
-       keyboardMap[key] = index; 
-    });
-    if (word.length < 1)
-        return 0;
-    let distanceTravelled = 0;
-    let currentIndex = 0;
-    let nextIndex = 0;
-    for (let i = 0; i < word.length; i++) {
-        nextIndex = keyboardMap[word[i]];
-        distanceTravelled = distanceTravelled + Math.abs(currentIndex - nextIndex);
-        currentIndex = nextIndex;
+
+function findDistanceByFinger(keyboard, word) {
+    let keyMap = {};
+    for (let i = 0; i < keyboard.length; i++) {
+        keyMap[keyboard[i]] = i;
     }
-    return distanceTravelled;
+    
+    let prev = 0;
+    let totalDistance = 0;
+    for (let ch of word) {
+        let currentPos = keyMap[ch];
+        totalDistance += Math.abs(prev - currentPos);
+        prev = currentPos;
+    }
+    
+    return totalDistance;
+    
+}
+
+var calculateTime = function(keyboard, word) {
+    return findDistanceByFinger(keyboard, word);
 };
+
+
+
+// 1 map [char] : index
+
+
