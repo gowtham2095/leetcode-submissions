@@ -26,7 +26,6 @@ function dfs(stone, stones, set) {
             }
         }
     }
-    
 }
 
 
