@@ -91,10 +91,8 @@ AutocompleteSystem.prototype.input = function(c) {
         result.sort((a, b) => {
             return a == b ? a < b :  this.hotnessMap[b] - this.hotnessMap[a];
         });
-        
         return result.length > 2 ? result.slice(0, 3) : result;
     }
-    
     
 };
 
