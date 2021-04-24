@@ -27,19 +27,37 @@ function removeNode(head, meta) {
     
 }
 
-var removeNthFromEnd = function(head, n) {
-    let meta = {
-        count: n - 1,
-        isNodeDeleted: false,
-        nextNode: null,
-        nextNodePointed: false
-    };
-    
-    removeNode(head, meta);
-    if (meta.nextNodePointed) {
-        head = meta.nextNode;
+function removeNthNode(head, n) {
+    let p1 = head;
+    while (n--) {
+        p1 = p1.next;
     }
-    
+    if (p1 == null)
+        return head.next;
+    let prev = null;
+    let p2 = head;
+    while (p1) {
+        prev = p2;
+        p2 = p2.next;
+        p1 = p1.next;
+    }
+    prev.next = p2.next;
     return head;
+}
+
+var removeNthFromEnd = function(head, n) {
+//     let meta = {
+//         count: n - 1,
+//         isNodeDeleted: false,
+//         nextNode: null,
+//         nextNodePointed: false
+//     };
     
+//     removeNode(head, meta);
+//     if (meta.nextNodePointed) {
+//         head = meta.nextNode;
+//     }
+    
+    // return head;
+    return removeNthNode(head, n);
 };
