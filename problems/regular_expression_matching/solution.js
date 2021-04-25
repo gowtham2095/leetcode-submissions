@@ -4,32 +4,53 @@
  * @return {boolean}
  */
 
-function doStringsMatch(s, p, i, j, map) {
-    if (map[i + '#' + j])
-        return map[i + '#' + j];
-    if (j == p.length)
-        return i == s.length;
-    let first = s[i] != undefined && (p[j] == s[i] || p[j] == '.');
-    if (j <= p.length - 2 && p[j + 1] == '*') {
-        return map[i + '#' + j] = (doStringsMatch(s, p, i, j + 2, map) || (first && doStringsMatch(s, p, i + 1, j, map)));
-    }
-    return  map[i + '#' + j] = (first && doStringsMatch(s, p, i + 1, j + 1, map));
+function isSAndPEqual(s, p, i, j) {
+    return s[i] == p[j] || s[i] != undefined && p[j] == '.';    
 }
 
-
+function isMatchRegex(s, p, i, j) {
+    if (i >= s.length && j >= p.length)
+        return true;
+    if (p[j + 1] == '*') {
+        return isMatchRegex(s, p, i, j + 2) || isSAndPEqual(s, p, i, j) && isMatchRegex(s, p, i + 1, j);
+    } else if (isSAndPEqual(s, p, i, j)) {
+        return isMatchRegex(s, p, i + 1, j + 1);
+    } else {
+        return false;
+    }
+}
 
 var isMatch = function(s, p) {
-    let map = {};
-    return doStringsMatch(s, p, 0, 0, map);
+    return isMatchRegex(s, p, 0, 0);
 };
 
+""
+".*c"
 
 
 
-// // s = 'a'
 
-// // p = ''
+// if characters match then move forward
 
-// // s = "", p = "a*"
 
-// s = "b", p = "b"
+
+// if (i == s.length and j == p.length)
+//     return true;
+
+
+// p[i] =='.' || s[i] == p[j]
+
+//     return s[i + 1] , p[j + 1]
+
+
+
+// // '' aa
+//       a*
+
+// // a* 
+
+
+
+// a
+// c*
+    
