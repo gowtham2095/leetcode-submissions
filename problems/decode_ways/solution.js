@@ -3,6 +3,7 @@
  * @return {number}
  */
 
+
 function isValidDecoding(str) {
     return str.length == 2 ? (Number(str) <= 26 && Number(str) >= 10) : Number(str) != 0;
 }
@@ -32,3 +33,5 @@ function findValidDecodings(s) {
 var numDecodings = function(s) {
     return findValidDecodings(s);
 };
+
+
