@@ -3,6 +3,7 @@
  * @param {number[][]} secondList
  * @return {number[][]}
  */
+
 function getIntervalIntersection(A, B) {
     let i = 0;
     let j = 0;
@@ -37,10 +38,3 @@ function getIntervalIntersection(A, B) {
 var intervalIntersection = function(firstList, secondList) {
     return getIntervalIntersection(firstList, secondList);
 };
-
-// The main result list = A, B
-
-
-// Max of start and Minimum of end
-
-
