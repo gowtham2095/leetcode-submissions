@@ -10,6 +10,8 @@
  * @param {Node} node
  * @return {Node}
  */
+
+
 function constructGraphDfs(node, markedNodes) {
    if (node) {
        if (markedNodes.get(node.val) != undefined) {
@@ -24,22 +26,6 @@ function constructGraphDfs(node, markedNodes) {
        return ele;
    } 
 }
-
-// function constructGraph(node) {
-//     let firstNode = null;
-//     if (node != null) {
-//         let queue = [];
-//         queue.push(node);
-//         while(queue.length) {
-//             let ele = queue.shift();
-//             let node = new Node(ele.val);
-//             if (firstNode === null) {
-//                 firstNode = node;
-//             }
-            
-//         }
-//     }
-// }
 
 var cloneGraph = function(node) {
     let map = new Map();
