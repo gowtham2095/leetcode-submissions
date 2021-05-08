@@ -72,3 +72,24 @@ var removeInvalidParentheses = function(s) {
     }
 };
 
+// Algo
+
+// Valid paran size = Full size - Invalid paran size
+
+// if (ValidParansize == 0)
+//     return true;
+
+// Include or Leave at everyPhase (Constrained programming)
+
+//     i) if s[i] == '(' 
+//             i) I can include or avoid (do both)
+//     ii) if s[i] == ')'
+//             ii) leftCount != 0
+//                     make leftCount - 1 and include
+//             iii) if leftCount == 0
+//                     return
+//     baseCase(size == validSize)
+//         return leftCount == 0 && result.push(str);
+
+//     if (size > validSize)
+//         return
