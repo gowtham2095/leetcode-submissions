@@ -5,7 +5,7 @@
  */
 
 function doStringsMatch(s, p, i, j, map) {
-    if (map[i + '#' + j])
+    if (map[i + '#' + j] != undefined)
         return map[i + '#' + j];
     if (j == p.length)
         return i == s.length;
