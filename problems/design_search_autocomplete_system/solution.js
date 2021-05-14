@@ -15,7 +15,6 @@ function Trie() {
 }
 
 function insertSentence(root, str, i) {
-
     let children = root.children;
     if (root.children[str[i].charCodeAt(0)] == undefined) {
         root.children[str[i].charCodeAt(0)] = new Node(str[i]);
