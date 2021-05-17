@@ -3,91 +3,48 @@
  * @return {string[][]}
  */
 
-function computeSequenceKey(str) {
-    if (str.length == 1)
-        return 0;
-    let prev = str[0];
-    let i = 1;
+function charCode(digit) {
+    return digit.charCodeAt(0) - 97;
+}
+
+function formSequenceId(digits) {
+    // console.log(digits)
     let key = '';
-    
-    while(i < str.length) {
-        let a = prev.charCodeAt(0);
-        let b = str[i].charCodeAt(0);
-        if (b < a) {
-            b = b + 26;
+    let prev = charCode(digits[0]);
+    let i = 1;
+    while (i < digits.length) {
+        let current = charCode(digits[i]);
+        if (current > prev) {
+            key = key + '#' + (current - prev);
+        } else {
+            key = key + '#' + ((current + 26) - prev);
         }
-        key += '#' + (b - a);
-        prev = str[i];
+        prev = current;
         i++;
     }
     return key;
 }
 
-function formStrings(strings) {
-    let sequenceMap = {};
-    strings.forEach((str) => {
-        let key = computeSequenceKey(str);
-        if (sequenceMap[key] == undefined) {
-            sequenceMap[key] = [];
-        }
-        sequenceMap[key].push(str);
-    });
-    let result = Object.keys(sequenceMap).map((key) => sequenceMap[key]);
-    return result;
-}
+// 'a l'
 
 var groupStrings = function(strings) {
-    return formStrings(strings);
+    let resultMap = {};
+    for (let i = 0; i < strings.length; i++) {
+        let key = formSequenceId(strings[i].split(''));
+        // console.log(key, strings[i]);
+        if (resultMap[key] == undefined) {
+            resultMap[key] = [];
+        }
+        resultMap[key].push(strings[i]);
+    }
+    return Object.keys(resultMap).map((key) => resultMap[key]);
 };
 
 
 
-// abc -> bcd -
-    
-    
-//     b =  2    a = 25;
+// abc -> 11
 
+// a z -> 1 -> 25
+// 1 26
 
-// acef
-// 2
-
-// b
-
-// ba
-
-// a
-// z
-
-
-
-// 123
-
-
-// 234
-//  11
-
-// xyz
-//  11
-
-// acef
-
-// 221
-
-
-// az
-// [25
- 
- 
-//  a, z
- 
-//  26+ 1 - 2
-//  b a
-//  25
- 
- 
-//  az
-//  25
- 
- 
- 
-//  if length == 1
+// b a -> prev > curr ->  2 1 + 26
