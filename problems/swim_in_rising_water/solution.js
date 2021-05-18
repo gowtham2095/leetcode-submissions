@@ -2,6 +2,7 @@
  * @param {number[][]} grid
  * @return {number}
  */
+
 function MinHeap() {
     this.list = [-Infinity];
     this.size = 0;
@@ -69,44 +70,3 @@ function findTheBestPath(grid) {
 var swimInWater = function(grid) {
     return findTheBestPath(grid);
 };
-
-
-
-// [16,11,31,9,1,26],
-// [2,25,12,29,20,32],
-// [18,34,30,3,0,23],
-// [19,35,5,28,27,10],
-// [14,6,15,21,33,4],
-// [8,22,7,13,24,17]
-
-// 16, 
-    
-    
-
-
-
-
-
-// graph - I have to find path from start to end
-
-//         I can move in 4 directions with only one restriction that if I choose a point B the difference should be lesser than t (Edge relationship)
-
-
-
-
-
-// Answer is finding the least is finding the least elelvation in the path
-
-
-
-// Dfs
-
-
-// [0, 1, 2, 3  4],
-// [24,23,22,21,5],
-// [12,13,14,15,16],
-// [11,17,18,19,20],
-// [10, 9, 8, 7, 6]
-
-
-
