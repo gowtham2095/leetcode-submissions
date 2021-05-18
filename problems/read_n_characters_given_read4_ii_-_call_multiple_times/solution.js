@@ -30,7 +30,7 @@ var solution = function(read4) {
             buf.push(currentBuf.shift());
             n--;
         }
-        console.log(buf.length, buf);
+        // console.log(buf.length, buf);
         return buf.length;
     };
 };
