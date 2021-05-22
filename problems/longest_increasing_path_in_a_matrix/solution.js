@@ -3,41 +3,46 @@
  * @return {number}
  */
 
-function doDfs(mat, i, j, prev, dpMat) {
-    if (i < 0 || j < 0 || i > mat.length -1 || j > mat[0].length - 1 || mat[i][j] <= prev) {
+
+function traverseMaxDfs(matrix, i, j, prev, dp) {
+    if (i < 0 || i > matrix.length - 1 || j < 0 || j > matrix[0].length - 1 || prev <= matrix[i][j]) {
         return 0;
     }
-    if (dpMat[i][j] != 0) {
-        return dpMat[i][j];
-    } else {
-        let leftRight = 1 + doDfs(mat, i, j+1, mat[i][j], dpMat);
-        let rightLeft = 1 + doDfs(mat, i, j - 1, mat[i][j], dpMat);
-        let bottomUp = 1 + doDfs(mat, i - 1, j, mat[i][j], dpMat);
-        let topBottom = 1 + doDfs(mat, i + 1, j, mat[i][j], dpMat);
-        dpMat[i][j] = Math.max(dpMat[i][j], Math.max(leftRight, rightLeft, bottomUp, topBottom));
+    if (dp[i][j] != -1) {
+        return dp[i][j];
     }
-    return dpMat[i][j];
+    let current = matrix[i][j];
+    let left =  1 + traverseMaxDfs(matrix, i, j - 1, current, dp);
+    let right = 1 + traverseMaxDfs(matrix, i, j + 1, current, dp);
+    let top = 1 + traverseMaxDfs(matrix, i - 1, j, current, dp);
+    let bottom = 1 + traverseMaxDfs(matrix, i + 1, j, current, dp);
+    return dp[i][j] = Math.max(left, right, top, bottom);
 }
 
-function computeLongestPath(mat) {
-    let prev = -Infinity;
-    let max = -Infinity;
-    let dpMat = [];
-    for (let i = 0; i < mat.length; i++) {
-        dpMat[i] = [];
-        for(let j = 0; j < mat[0].length; j++) {
-            dpMat[i].push(0);
+
+function getMaxPath(matrix) {
+    let max = 0;
+    let dp = [];
+    for (let i = 0; i < matrix.length; i++) {
+        dp[i] = [];
+        for(let j = 0; j < matrix[0].length; j++) {
+            dp[i][j] = -1
         }
     }
-    for (let i = 0; i < mat.length; i++) {
-        for(let j = 0; j < mat[0].length; j++) {
-            max = Math.max(max, doDfs(mat, i, j, prev, dpMat));
+    for (let i = 0; i < matrix.length; i++) {
+        for(let j = 0; j < matrix[0].length; j++) {
+            max = Math.max(max, traverseMaxDfs(matrix, i, j, Infinity, dp)) 
         }
     }
     return max;
 }
+
 var longestIncreasingPath = function(matrix) {
-    return computeLongestPath(matrix);
+    return getMaxPath(matrix);
 };
 
 
+
+// [[9,9,4],
+//  [6,6,8],
+//  [2,1,1]]
