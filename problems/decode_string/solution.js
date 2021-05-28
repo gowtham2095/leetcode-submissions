@@ -2,45 +2,83 @@
  * @param {string} s
  * @return {string}
  */
+// 3[a2[c]]
 
-function decode(s) {
-    let i = 0;
+// [3, 'a','cc', ]
+ 
+//  3[a]2[bc]
+
+// ['aaa', 'bcbc' ]
+
+function decodeStr(s) {
     let stack = [];
-    let number = '';
-    let result = '';
+    
+    let res = '';
+    let i = 0;
+    let num = '';
     while (i < s.length) {
-        if (s[i] >= '0' && s[i] <= '9') {
-            number += s[i];
-        } else if (s[i] == '[') {
-            stack.push(Number(number));
-            number = '';
+        if (isDigit(s[i])) {
+            num += s[i];
+        } else if (num != '') {
+            stack.push(Number(num));
+            num = '';
             stack.push('[');
-        } else if (s[i] == ']') {
+        } else if (s[i] != ']') {
+            stack.push(s[i]);
+        } else {
             let top = stack.pop();
-            let temp = '';
+            let str = ''
             while(top != '[') {
-                temp = top + temp;
+                str = top + str;
                 top = stack.pop();
             }
             top = stack.pop();
-            let str = temp.repeat(top);
-            if (stack.length == 0) {
-                result = result + str;
-            } else {
-                stack.push(str);
-            }
-        } else {
-            if (stack.length != 0) {
-                stack.push(s[i]);
-            } else {
-                result = result + s[i];    
-            }
+            stack.push(str.repeat(top));
         }
         i++;
     }
-    return result;
+    while(stack.length) {
+        let top = stack.pop();
+        res = top + res;
+    }
+    return res;
 }
+
+
+function isDigit(ch) {
+    return ch.charCodeAt(0) > 47 && ch.charCodeAt(0) < 58;
+}
+
 var decodeString = function(s) {
-    return decode(s);
+    return decodeStr(s)
 };
 
+
+
+// 3[a]2[bc]
+
+
+
+// let res = ''
+
+// // res += popped string from empty string
+
+
+// 3[a2[c]]
+
+
+
+
+
+
+
+// stack
+
+// ]
+// cc
+// a
+// [
+// 3
+    
+    
+//     accaccacc
