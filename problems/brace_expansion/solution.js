@@ -3,43 +3,53 @@
  * @return {string[]}
  */
 
-function formList(s) {
-    let closebracketsSplit = s.split('}');
-    let openbracketsSplit = closebracketsSplit.map((str) => str.split('{'));
-    let flatStringList = openbracketsSplit.flat();
-    let stringList = flatStringList.filter((str) => str);
-    let finalList = stringList.map((str) => {
-        let list = str.split(',');
-        list.sort();
-        return list;
-    });
-    return finalList;
+function parseInput(s) {
+    let parsedInput = [];
+    let i = 0;
+    while(i < s.length) {
+        if (s[i] == '{') {
+            let currentList = [];
+            i++;
+            while(s[i] != '}') {
+                if (s[i] != ',') {
+                    currentList.push(s[i]);
+                }
+                i++;
+            }
+            parsedInput.push(currentList);
+        } else {
+            parsedInput.push([s[i]]);
+        }
+        i++;
+    }
+    return parsedInput;
 }
 
-function perumteString(list, result, i, str) {
-    if (i == list.length) {
-        result.push(str);
+function permuteStrings(list, result, level, combiString) {
+    if (level == list.length) {
+        result.push(combiString);
+        return;
     }
-    else {
-        list[i].forEach((char) => {
-            perumteString(list, result, i + 1, str +char);
-        });
+    let currentList = list[level]
+    for (let i = 0; i < currentList.length; i++) {
+        permuteStrings(list, result, level + 1, combiString + currentList[i])
     }
 }
 
 var expand = function(s) {
-    let strList = formList(s);
+    let list = parseInput(s);
     let result = [];
-    perumteString(strList, result, 0, '');
-    return result;
+    permuteStrings(list, result, 0, '');
+    return result.sort();
 };
 
 
 
+// "{a,b} c {d,e} f"
 
 
 
-// [a, b] [c] [d, e, f]
+// {a, }, d, e
 
-
-
+ 
+//  [a, b] [c] [d, e] [f]
