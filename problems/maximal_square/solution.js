@@ -1,10 +1,3 @@
-/**
- * @param {character[][]} matrix
- * @return {number}
- */
-
-
-
 function findMaxSquare(matrix, m, n, max) {
     
     for (let i = 1; i < m; i++) {
