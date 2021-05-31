@@ -34,7 +34,7 @@ function performOverlap(result, left, right) {
 
 function mergeIntervals(intervals, newInterval) {
     let findPos = binarySearch(intervals, newInterval);
-    console.log(findPos);
+    // console.log(findPos);
     if (findPos == intervals.length) {
         intervals.push(newInterval);
     }
@@ -53,6 +53,7 @@ function mergeIntervals(intervals, newInterval) {
             performOverlap(result, newLeft, newRight);
         }
         performOverlap(result, left, right);
+        
     }
     return result;
 }
