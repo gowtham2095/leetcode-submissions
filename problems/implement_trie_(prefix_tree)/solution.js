@@ -34,7 +34,7 @@ Trie.prototype.insert = function(word) {
  * @param {string} word
  * @return {boolean}
  */
-Trie.prototype.search = function(word) {
+Trie.prototype.search = function(word, isSearch = true) {
     let node = this.root;
     for (let i = 0; i < word.length; i++) {
         let isPresent = node[word.charCodeAt(i)];
@@ -43,7 +43,7 @@ Trie.prototype.search = function(word) {
         }
         node = node[word.charCodeAt(i)];
     }
-    if (!node.isEndNode) {
+    if (isSearch && !node.isEndNode) {
         return false;
     }
     return true;
@@ -55,15 +55,16 @@ Trie.prototype.search = function(word) {
  * @return {boolean}
  */
 Trie.prototype.startsWith = function(prefix) {
-    let node = this.root;
-    for (let i = 0; i < prefix.length; i++) {
-        let isPresent = node[prefix.charCodeAt(i)];
-        if (!isPresent) {
-            return false;
-        }
-        node = node[prefix.charCodeAt(i)];
-    }
-    return true;
+    // let node = this.root;
+    // for (let i = 0; i < prefix.length; i++) {
+    //     let isPresent = node[prefix.charCodeAt(i)];
+    //     if (!isPresent) {
+    //         return false;
+    //     }
+    //     node = node[prefix.charCodeAt(i)];
+    // }
+    // return true;
+    return this.search(prefix, false);
 };
 
 /** 
