@@ -19,7 +19,7 @@ function palindromeDP(s) {
         state[i][i] = true;
         result++;
     }
-    for (let start = s.length - 1; start >= 0; start--) {
+    for (let start = s.length - 2; start >= 0; start--) {
         for (let end = start + 1; end < s.length; end++) {
             if (s[start] == s[end]) {
                 if (end - start == 1 || state[start + 1][end - 1] == true) {
