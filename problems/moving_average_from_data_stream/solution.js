@@ -13,6 +13,7 @@ var MovingAverage = function(size) {
     this.head = null;
     this.tail = null;
     this.listSize = 0;
+    this.currentSum = 0;
 };
 
 /** 
@@ -21,13 +22,7 @@ var MovingAverage = function(size) {
  */
 
 MovingAverage.prototype.calculateAverage = function(list, windowSize) {
-    let curr = list;
-    let sum = 0;
-    while(curr) {
-        sum += curr.val;
-        curr = curr.next;
-    }
-    return sum/this.listSize;
+    return this.currentSum/this.listSize;
 }
 
 MovingAverage.prototype.next = function(val) {
@@ -36,12 +31,16 @@ MovingAverage.prototype.next = function(val) {
         if (!this.head) {
              this.head = newNode;
              this.tail = this.head;
+             this.currentSum = val;
              this.listSize++;    
         } else {
             if (this.listSize == this.windowSize) {
+                let temp = this.head.val;
                 this.head = this.head.next;
                 this.listSize--;
+                this.currentSum -= temp;
             }
+            this.currentSum += val;
             this.tail.next = newNode;
             this.tail = this.tail.next;
             this.listSize++;
