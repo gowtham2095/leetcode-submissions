@@ -9,7 +9,6 @@ function willItSolve(chosenValue, piles, h) {
 	let currentValue = piles[0];
 	let count = 0;
 	while (i != piles.length) {
-
 		if (currentValue <= chosenValue) {
             if (currentValue != 0)
 			    count++;
