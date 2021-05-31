@@ -4,16 +4,6 @@
  * @param {number} cols
  * @return {number}
  */
-// ["a", "bcd", "e"]
-
-//     ,  a ,   ,   ,   ,
-//     ,   ,   ,   ,   ,
-//     ,   ,   ,   ,   ,
-    
-
-
-
-
 function findFitCount(sentence, rows, cols) {
     let currentRow = 0;
     let currentCol = 0;
@@ -22,7 +12,6 @@ function findFitCount(sentence, rows, cols) {
     while (currentRow < rows) {
         while (currentCol + sentence[ptr].length <= cols) {
             currentCol += sentence[ptr].length + ((currentCol != cols) ? 1 : 0);
-            // console.log(currentCol);
             ptr++;
             if (ptr == sentence.length) {
                 count++;
@@ -38,9 +27,3 @@ function findFitCount(sentence, rows, cols) {
 var wordsTyping = function(sentence, rows, cols) {
     return findFitCount(sentence, rows, cols);
 };
-
-
-
-// sentence = ["hello","world"], 
-    
-// rows = 2, cols = 8
