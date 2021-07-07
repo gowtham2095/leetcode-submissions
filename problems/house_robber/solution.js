@@ -3,23 +3,26 @@
  * @return {number}
  */
 
-function findMaxiumumValueRobbed(arr, start, dp) {
-	if (dp[start] != undefined) {
-		return dp[start];
-	}
-	if (start == arr.length - 1 || start == arr.length - 2) {
-		return dp[start] = arr[start];
-	}
-    let max = 0;
-	for (let i = start + 2; i < arr.length; i++) {
-		if (i != start + 1) {
-            max = Math.max(arr[start] + findMaxiumumValueRobbed(arr, i, dp), max);
-		}
-	}
-	return dp[start] = max;
+function findMaxVal(nums, level, max) {
+    if (max[level] != undefined) {
+        return max[level];
+    }
+    if (level > nums.length - 1) {
+        return 0;
+    } else if (level + 1 == nums.length) {
+       return nums[level]; 
+    }
+    return max[level] = Math.max(nums[level] + findMaxVal(nums, level + 2, max), nums[level + 1] + findMaxVal(nums, level + 3, max));
 }
-
 var rob = function(nums) {
-    let dp = []
-    return Math.max(findMaxiumumValueRobbed(nums, 0, dp), findMaxiumumValueRobbed(nums, 1, dp));
+    let max = {};
+    return findMaxVal(nums, 0, max)
 };
+
+
+
+
+// [2,7,9,3,1]
+
+
+// [7, 2, 1, 9]
