@@ -19,7 +19,6 @@ function fullJustifySentence(words, maxWidth) {
         if (i >= words.length) {
             let lineWord = lineWords.join(' ');
             let spacesLength = maxWidth - lineWord.length;
-            // console.log(spacesLength);
             lineWord = lineWord + ' '.repeat(spacesLength);
             result.push(lineWord);
             return result;
@@ -33,13 +32,11 @@ function fullJustifySentence(words, maxWidth) {
             let spaces = [];
             let spacesBetween = Math.floor(totalSpace / (lineWords.length - 1));
             let remainingSpace = totalSpace % (lineWords.length - 1);
-            // console.log(totalSpace, spacesBetween, remainingSpace);
             for (let i = 0; i < lineWords.length - 1; i++) {
                 spaces[i] = spacesBetween + (remainingSpace > 0 ? 1 : 0);
                 remainingSpace--;
             }    
             let k = 1;
-            // console.log(lineWords, spaces);
             for (let i = 1; i < lineWords.length; i++) {
                 line = line + (lineWords[i - 1] + ' '.repeat(spaces[i - 1]));
                 k = i;
@@ -48,7 +45,6 @@ function fullJustifySentence(words, maxWidth) {
         }
         result.push(line);
     }
-    
     return result;
 }
 var fullJustify = function(words, maxWidth) {
