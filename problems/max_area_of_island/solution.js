@@ -2,6 +2,8 @@
  * @param {number[][]} grid
  * @return {number}
  */
+
+//Correct solution
 function computeDfs(grid, i, j) {
     if (i < 0 || j < 0 || i > grid.length - 1 || j > grid[0].length - 1 || grid[i][j] == 0)
         return 0;
@@ -12,19 +14,6 @@ function computeDfs(grid, i, j) {
     let left = computeDfs(grid, i, j - 1);
     return 1 + bottom + top + right + left;
 }
-
-function dfs(grid, i, j) {
-    if (i < 0 || j < 0 || i > grid.length - 1 || j > grid[0].length - 1 || grid[i][j] == 0)
-        return 0;
-    grid[i][j] = 0;
-    let bottom = 1 + dfs(grid, i + 1, j);
-    let top = 1 + dfs(grid, i - 1, j);
-    let right = 1 + dfs(grid, i, j + 1);
-    let left = 1 + dfs(grid, i, j - 1);
-    let max = Math.max(bottom, top, left, right);
-    return max;
-}
-
 
 
 function maxIslandSize(grid) {
@@ -45,3 +34,22 @@ function maxIslandSize(grid) {
 var maxAreaOfIsland = function(grid) {
     return maxIslandSize(grid);
 };
+
+
+
+
+
+
+// Mistake
+
+function dfs(grid, i, j) {
+    if (i < 0 || j < 0 || i > grid.length - 1 || j > grid[0].length - 1 || grid[i][j] == 0)
+        return 0;
+    grid[i][j] = 0;
+    let bottom = 1 + dfs(grid, i + 1, j);
+    let top = 1 + dfs(grid, i - 1, j);
+    let right = 1 + dfs(grid, i, j + 1);
+    let left = 1 + dfs(grid, i, j - 1);
+    let max = Math.max(bottom, top, left, right);
+    return max;
+}
