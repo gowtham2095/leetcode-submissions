@@ -3,25 +3,70 @@
  * @return {number}
  */
 
-function countIslands(grid, row, col) {
-    if (row < 0 || col < 0 || row > grid.length - 1 || col > grid[0].length -1 || grid[row][col] == '0')
+function doDfs(grid, i, j) {
+    if (i > grid.length -1 || j > grid[0].length - 1 || j < 0 || i < 0 || grid[i][j] == '0')
         return;
-    grid[row][col] = '0';
-    countIslands(grid, row + 1, col);
-    countIslands(grid, row - 1, col);
-    countIslands(grid, row, col + 1);
-    countIslands(grid, row, col - 1);
+    grid[i][j] = '0';
+    doDfs(grid, i + 1, j);
+    doDfs(grid, i, j + 1);
+    doDfs(grid, i - 1, j);
+    doDfs(grid, i, j - 1);
 }
 
-var numIslands = function(grid) {
+function countIslands(grid) {
     let count = 0;
     for (let i = 0; i < grid.length; i++) {
-        for(let j = 0; j < grid[0].length; j++) {
+        for (let j = 0; j < grid[0].length; j++) {
             if (grid[i][j] == '1') {
                 count++;
-                countIslands(grid, i, j);
+                doDfs(grid, i, j);
             }
         }
     }
     return count;
+}
+
+var numIslands = function(grid) {
+    return countIslands(grid);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function dfs(grid, i, j) {
+    
+//     if (i >= grid.length || i < 0 || j < 0 || j >= grid[0].length || grid[i] && grid[i][j] === '0')
+//         return;
+//     grid[i][j] = '0';
+//     dfs(grid, i, j + 1);
+//     dfs(grid, i + 1, j);
+//     dfs(grid, i, j - 1);
+//     dfs(grid, i - 1 , j);
+// }
+
+// function countIslands(grid) {
+//     let count = 0;
+//     for(let i = 0; i < grid.length; i++) {
+//         for (let j = 0; j < grid[0].length; j++) {
+//             if (grid[i][j] === '1') {
+//                 count++;
+//                 dfs(grid, i, j)
+//             }
+//         }
+//     }
+//     return count;
+// }
