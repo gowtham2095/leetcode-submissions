@@ -9,7 +9,6 @@
  * @param {ListNode} head
  * @return {boolean}
  */
-
 var listReversal = function(head) {
     let pointer1 = null;
     let pointer2 = head;
@@ -48,4 +47,4 @@ var isPalindrome = function(head) {
         head = head.next;
     }
     return true
-};
+}
