@@ -35,6 +35,7 @@ MaxHeap.prototype.remove = function(index = 1) {
         if (child + 1 <= this.size && this.list[child + 1].val >= this.list[child].val) {
             child = child + 1;
         }
+        
         if (this.list[child].val > last.val) {
             let temp = this.list[child];
             this.list[i] = this.list[child];
@@ -50,36 +51,8 @@ MaxHeap.prototype.remove = function(index = 1) {
 }
 
 
-                1
-
-
-            3
-    
-    
-//     5, 1, 2, 4, 3
-
-
-//         0, 
-
-//             5
-//         4       2
-
-//     1       3
-            
-
-
-    
-//             5
-//         4       3
-    
-//     2       1
-
-
-
 function slidingWindowMax(nums, k) {
     let maxHeap = new MaxHeap();
-    // maxHeap.insert(nums[0], 0);
-    // maxHeap.insert(nums[1], 1);
     for (let i = 0; i < k; i++) {
         maxHeap.insert(nums[i], i);
     }
@@ -89,7 +62,7 @@ function slidingWindowMax(nums, k) {
         result.push(maxHeap.peek());
         maxHeap.remove(cptr);
         maxHeap.insert(nums[i], i);
-        // console.log(maxHeap.list, 'Val', nums[i]);
+        console.log(maxHeap.list, 'Val', nums[i]);
         // console.log(maxHeap.heapMap);
         cptr++;
     }
@@ -101,7 +74,6 @@ function slidingWindowMax(nums, k) {
 // var maxSlidingWindow = function(nums, k) {
 //     return slidingWindowMax(nums, k);
 // };
-
 
 var maxSlidingWindow = function(nums, k) {
     const q = [];  // stores *indices*
@@ -122,6 +94,8 @@ var maxSlidingWindow = function(nums, k) {
     }
     return res;    
 };
+
+
 
 // [1,3,-1,-3,5,3,6,7]
 
